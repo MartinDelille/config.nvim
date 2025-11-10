@@ -52,6 +52,7 @@ return {
 				"eslint_d",
 				"rust-analyzer",
 				"gdtoolkit",
+				"shfmt",
 			},
 		})
 	end,

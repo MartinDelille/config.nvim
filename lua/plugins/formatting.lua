@@ -8,8 +8,10 @@ return {
 			formatters_by_ft = {
 				javascript = { "prettier" },
 				css = { "prettier" },
+				scss = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
+				jsonc = { "prettier" },
 				yaml = { "prettier" },
 				cpp = { "clang-format" },
 				markdown = { "prettier" },
@@ -18,6 +20,7 @@ return {
 				python = { "isort", "black" },
 				gdscript = { "gdformat" },
 				gdshader = { "clang-format" },
+				sh = { "shfmt" },
 			},
 			format_on_save = function(bufnr)
 				-- Disable with a global or buffer-local variable
