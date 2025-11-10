@@ -35,5 +35,8 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 keymap.set("n", "<tab>", "<cmd>bn<CR>", { desc = "Go to next buffer" })
 keymap.set("n", "<S-tab>", "<cmd>bp<CR>", { desc = "Go to previous buffer" })
 
+-- Update lazy plugins
+keymap.set("n", "<leader>lz", "<cmd>Lazy update<CR>", { desc = "Update lazy plugins" })
+
 -- Run make
 keymap.set("n", "<leader>mm", "<cmd>term make<CR>", { desc = "Run make" })
