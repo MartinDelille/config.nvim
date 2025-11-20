@@ -8,43 +8,33 @@ return {
 		end,
 	},
 	{
-		"CopilotC-Nvim/CopilotChat.nvim",
+		"olimorris/codecompanion.nvim",
+		opts = {},
 		dependencies = {
-			{ "github/copilot.vim" },
-		},
-		build = "make tiktoken",
-		opts = {
-			-- model = "claude-3.7-sonnet",
-			debug = true,
-			mappings = {
-				complete = {
-					detail = "Use @<Tab> or /<Tab> for options.",
-					insert = "<S-Tab>",
-				},
-				reset = {
-					normal = "<C-r>",
-					insert = "<C-r>",
-				},
-			},
+			"nvim-lua/plenary.nvim",
+			"ravitemer/codecompanion-history.nvim",
 		},
 		keys = {
-			{ "<leader>ccc", ":CopilotChat<CR>", desc = "Open Copilot Chat" },
-			{
-				"<leader>ccq",
-				function()
-					local input = vim.fn.input("Quick Chat: ")
-					if input ~= "" then
-						require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
-					end
-				end,
-				desc = "CopilotChat - Quick Chat",
-			},
-			{
-				"<leader>ccp",
-				function() require("CopilotChat").select_prompt() end,
-				desc = "CopilotChat - Prompt actions",
-			},
-			{ "<leader>ccm", ":CopilotChatModel<CR>", desc = "CopilotChat - Model" },
+			{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Code Companion" },
 		},
+		config = function()
+			require("codecompanion").setup({
+				strategies = {
+					inline = {
+						keymaps = {
+							accept_change = { modes = { n = "<leader>ca" } },
+							reject_change = { modes = { n = "<leader>cr" } },
+							always_accept = { modes = { n = "<leader>cy" } },
+						},
+					},
+				},
+				extensions = {
+					history = {
+						enabled = true,
+						opts = {},
+					},
+				},
+			})
+		end,
 	},
 }
