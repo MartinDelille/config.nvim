@@ -55,9 +55,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 	group = custom_au_group,
 	pattern = { "*" },
-	callback = function()
-		vim.highlight.on_yank({ timeout = 200 })
-	end,
+	callback = function() vim.highlight.on_yank({ timeout = 200 }) end,
 })
 
 -- Set wrap option for markdown files only

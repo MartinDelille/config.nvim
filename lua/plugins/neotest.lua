@@ -3,9 +3,7 @@ return {
 	keys = {
 		{
 			"<leader>tr",
-			function()
-				require("neotest").run.run()
-			end,
+			function() require("neotest").run.run() end,
 			"Run tests",
 		},
 	},

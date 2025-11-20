@@ -3,8 +3,6 @@ return {
 	{ "folke/tokyonight.nvim" },
 	{
 		"sonph/onehalf",
-		config = function(plugin)
-			vim.opt.rtp:append(plugin.dir .. "/vim")
-		end,
+		config = function(plugin) vim.opt.rtp:append(plugin.dir .. "/vim") end,
 	},
 }
