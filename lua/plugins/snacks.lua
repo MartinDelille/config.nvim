@@ -52,7 +52,6 @@ return {
 		{ "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
 		{ "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
 		{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-		{ "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
 		{ "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 		-- git
 		{ "<leader>gbr", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
@@ -78,5 +77,7 @@ return {
 		{ "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
 		{ "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
 		{ "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+		-- Notifications
+		{ "<leader>nn", function() Snacks.notifier.show_history() end, desc = "Notification History" },
 	},
 }
