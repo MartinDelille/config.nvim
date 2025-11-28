@@ -1,6 +1,26 @@
 return {
 	"nvim-lua/plenary.nvim",
 	"christoomey/vim-tmux-navigator",
+	-- {
+	-- "christoomey/vim-tmux-navigator",
+	-- cmd = {
+	-- "TmuxNavigateLeft",
+	-- "TmuxNavigateDown",
+	-- "TmuxNavigateUp",
+	-- "TmuxNavigateRight",
+	-- "TmuxNavigatePrevious",
+	-- "TmuxNavigatorProcessList",
+	-- },
+	-- init = function() vim.g.tmux_navigator_no_mappings = 1 end,
+	-- keys = {
+	-- { mode = { "n", "t" }, "<c-h>", "<cmd>TmuxNavigateLeft<cr>" },
+	-- { mode = { "n", "t" }, "<c-j>", "<cmd>TmuxNavigateDown<cr>" },
+	-- { mode = { "n", "t" }, "<c-k>", "<cmd>TmuxNavigateUp<cr>" },
+	-- { mode = { "n", "t" }, "<c-l>", "<cmd>TmuxNavigateRight<cr>" },
+	-- { mode = { "n", "t" }, "<c-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
+	-- },
+	-- },
+	{ "mrjones2014/smart-splits.nvim" },
 	{
 		"catgoose/nvim-colorizer.lua",
 		config = function() require("colorizer").setup() end,

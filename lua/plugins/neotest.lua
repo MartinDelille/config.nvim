@@ -1,12 +1,12 @@
 return {
 	"nvim-neotest/neotest",
-	keys = {
-		{
-			"<leader>tr",
-			function() require("neotest").run.run() end,
-			"Run tests",
-		},
-	},
+	-- keys = {
+	-- {
+	-- "<leader>tr",
+	-- function() require("neotest").run.run() end,
+	-- "Run tests",
+	-- },
+	-- },
 	dependencies = {
 		"nvim-neotest/nvim-nio",
 		"nvim-neotest/neotest-python",

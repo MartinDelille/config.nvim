@@ -42,3 +42,5 @@ keymap.set("n", "<leader>lz", "<cmd>Lazy update<CR>", { desc = "Update lazy plug
 keymap.set("n", "<leader>mm", "<cmd>term make<CR>", { desc = "Run make" })
 
 keymap.set("n", "<leader>yp", ':let @+ = expand("%:p")<CR>', { desc = "Yank file path to clipboard" })
+
+keymap.set("n", "<A-u>", "<cmd>echo 'baba'<CR>", { desc = "Test Alt-u" })

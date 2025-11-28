@@ -1,4 +1,4 @@
-return {
+local plugin = {
 	"uga-rosa/translate.nvim",
 	config = function()
 		require("translate").setup({
@@ -15,3 +15,4 @@ return {
 		{ "<leader>tr", "<cmd>Translate en -output=replace<CR>", mode = "v", desc = "Translate selection and replace" },
 	},
 }
+return {}
