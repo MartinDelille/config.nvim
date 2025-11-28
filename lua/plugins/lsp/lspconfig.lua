@@ -5,8 +5,8 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		{ "folke/neodev.nvim", opts = {} },
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
+		"mason-org/mason.nvim",
+		"mason-org/mason-lspconfig.nvim",
 	},
 	config = function()
 		-- import cmp-nvim-lsp plugin for capabilities
@@ -50,16 +50,13 @@ return {
 			vim.lsp.enable(server)
 		end
 
-		-- Optional: Configure specific servers with custom settings
-		-- Example for lua_ls:
-		-- vim.lsp.config('lua_ls', {
-		--   settings = {
-		--     Lua = {
-		--       runtime = { version = 'LuaJIT' },
-		--       diagnostics = { globals = { 'vim' } },
-		--       workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-		--     }
-		--   }
-		-- })
+		-- Configure pyright to use Python from PATH
+		vim.lsp.config("pyright", {
+			settings = {
+				python = {
+					pythonPath = vim.fn.exepath("python3"),
+				},
+			},
+		})
 	end,
 }

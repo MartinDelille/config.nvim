@@ -17,6 +17,7 @@ return {
 				markdown = { "prettier" },
 				liquid = { "prettier" },
 				lua = { "stylua" },
+				-- python = { "isort" },
 				python = { "isort", "black" },
 				gdscript = { "gdformat" },
 				gdshader = { "clang-format" },

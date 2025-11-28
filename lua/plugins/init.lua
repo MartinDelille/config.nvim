@@ -27,16 +27,16 @@ return {
 	},
 	"rhysd/conflict-marker.vim",
 	{ "habamax/vim-godot", event = "VimEnter" },
-	{
-		"sontungexpt/url-open",
-		event = "VeryLazy",
-		cmd = "URLOpenUnderCursor",
-		config = function()
-			local status_ok, url_open = pcall(require, "url-open")
-			if not status_ok then return end
-			url_open.setup({})
-		end,
-	},
+	-- {
+	-- "sontungexpt/url-open",
+	-- event = "VeryLazy",
+	-- cmd = "URLOpenUnderCursor",
+	-- config = function()
+	-- local status_ok, url_open = pcall(require, "url-open")
+	-- if not status_ok then return end
+	-- url_open.setup({})
+	-- end,
+	-- },
 	{
 		"magicmonty/sonicpi.nvim",
 		dependencies = {
