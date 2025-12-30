@@ -1,16 +1,10 @@
 return {
 	"Civitasv/cmake-tools.nvim",
 	keys = {
-		{
-			"<leader>cb",
-			"<cmd>CMakeBuild<CR>",
-			desc = "CMake build",
-		},
-		{
-			"<leader>cr",
-			"<cmd>CMakeRun<CR>",
-			desc = "CMake run",
-		},
+		{ desc = "CMake generate", "<leader>cg", "<cmd>CMakeGenerate<CR>" },
+		{ desc = "CMake build", "<leader>cb", "<cmd>CMakeBuild<CR>" },
+		{ desc = "CMake run", "<leader>cr", "<cmd>CMakeRun<CR>" },
+		{ desc = "CMake select build target", "<leader>ct", "<cmd>CMakeSelectBuildTarget<CR>" },
 	},
 	config = function()
 		require("cmake-tools").setup({
