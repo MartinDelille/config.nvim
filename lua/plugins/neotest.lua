@@ -2,7 +2,7 @@ return {
 	"nvim-neotest/neotest",
 	keys = {
 		{
-			"<leader>tr",
+			"<leader>tt",
 			function() require("neotest").run.run() end,
 			"Run tests",
 		},
