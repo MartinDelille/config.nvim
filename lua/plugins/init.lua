@@ -6,4 +6,8 @@ return {
 	},
 	"rhysd/conflict-marker.vim",
 	{ "habamax/vim-godot", event = "VimEnter" },
+	{
+		"Kicamon/markdown-table-mode.nvim",
+		config = function() require("markdown-table-mode").setup() end,
+	},
 }
