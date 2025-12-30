@@ -67,8 +67,11 @@ return {
 		{ "<leader>s/", function() Snacks.picker.search_history() end, desc = "Search History" },
 		{ "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
 		{ "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+		{ "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
 		{ "<leader>th", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
 		{ "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
+		{ "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+		{ "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
 		-- LSP
 		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
 		{ "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
