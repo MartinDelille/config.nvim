@@ -63,9 +63,10 @@ return {
 		-- search
 		{ '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
 		{ "<leader>s/", function() Snacks.picker.search_history() end, desc = "Search History" },
-		{ "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
+		{ "<leader>sc", function() Snacks.dashboard.pick("files", { cwd = vim.fn.stdpath("config") }) end, desc = "Configuration" },
 		{ "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
 		{ "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
+		{ "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
 		{ "<leader>th", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
 		{ "<leader>sD", function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer Diagnostics" },
 		{ "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
