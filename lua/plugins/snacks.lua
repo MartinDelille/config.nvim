@@ -23,7 +23,6 @@ return {
 				header = require("ascii.pacman_ghost"),
 			},
 		},
-		explorer = { enabled = true },
 		indent = { enabled = true },
 		input = { enabled = true },
 		picker = {
@@ -47,12 +46,11 @@ return {
 		words = { enabled = true },
 	},
 	keys = {
-		-- Top Pickers & Explorer
+		-- Top Pickers
 		{ "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
 		{ "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
 		{ "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
 		{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-		{ "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 		-- git
 		{ "<leader>gbr", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
 		{ "<leader>gbl", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
