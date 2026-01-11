@@ -9,7 +9,6 @@ return {
 	},
 	{
 		"olimorris/codecompanion.nvim",
-		opts = {},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"ravitemer/codecompanion-history.nvim",
@@ -17,24 +16,22 @@ return {
 		keys = {
 			{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Code Companion" },
 		},
-		config = function()
-			require("codecompanion").setup({
-				strategies = {
-					inline = {
-						keymaps = {
-							accept_change = { modes = { n = "<leader>ca" } },
-							reject_change = { modes = { n = "<leader>cr" } },
-							always_accept = { modes = { n = "<leader>cy" } },
-						},
+		opts = {
+			strategies = {
+				inline = {
+					keymaps = {
+						accept_change = { modes = { n = "<leader>ca" } },
+						reject_change = { modes = { n = "<leader>cr" } },
+						always_accept = { modes = { n = "<leader>cy" } },
 					},
 				},
-				extensions = {
-					history = {
-						enabled = true,
-						opts = {},
-					},
+			},
+			extensions = {
+				history = {
+					enabled = true,
+					opts = {},
 				},
-			})
-		end,
+			},
+		},
 	},
 }
