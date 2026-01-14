@@ -12,6 +12,12 @@ return {
 						shorting_target = 40,
 					},
 				},
+				lualine_x = {
+					require("plugins.extensions.lualine_codecompanion"),
+					"encoding",
+					"fileformat",
+					"filetype",
+				},
 			},
 		})
 	end,
