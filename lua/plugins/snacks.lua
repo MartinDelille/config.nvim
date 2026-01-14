@@ -10,15 +10,15 @@ return {
 
 			preset = { ---@type snacks.dashboard.Item[]
 				keys = {
-					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-					{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-					{ icon = " ", key = "t", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+					{ icon = " ", key = "f", desc = "Find File", action = function() Snacks.dashboard.pick("files") end },
+					{ icon = " ", key = "n", desc = "New File", action = function() vim.cmd("ene | startinsert") end },
+					{ icon = " ", key = "t", desc = "Find Text", action = function() Snacks.dashboard.pick("live_grep") end },
 					{ icon = " ", key = "g", desc = "Copilot Chat", action = "<cmd>Lazy load codecompanion.nvim<CR><cmd>CodeCompanionChat<CR><cmd>only<CR>" },
-					{ icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-					{ icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+					{ icon = " ", key = "r", desc = "Recent Files", action = function() Snacks.dashboard.pick("oldfiles") end },
+					{ icon = " ", key = "c", desc = "Config", action = function() Snacks.dashboard.pick("files", { cwd = vim.fn.stdpath("config") }) end },
 					{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
-					{ icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
-					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+					{ icon = "󰒲 ", key = "L", desc = "Lazy", action = function() vim.cmd("Lazy") end, enabled = package.loaded.lazy ~= nil },
+					{ icon = " ", key = "q", desc = "Quit", action = function() vim.cmd("qa") end },
 				},
 				header = require("ascii.pacman_ghost"),
 			},
@@ -51,6 +51,8 @@ return {
 		{ "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
 		{ "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
 		{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+		-- find
+		{ "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
 		-- git
 		{ "<leader>gbr", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
 		{ "<leader>gbl", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
