@@ -41,6 +41,9 @@ return {
 				"godot_resource",
 				"gdshader",
 				"glsl",
+				"angular",
+				"typescript",
+				"tsx",
 			},
 			incremental_selection = {
 				enable = true,

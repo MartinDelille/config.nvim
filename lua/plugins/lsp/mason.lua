@@ -37,6 +37,7 @@ return {
 				"emmet_ls",
 				"pyright",
 				"ts_ls",
+				"angularls",
 			},
 		})
 
