@@ -1,5 +1,6 @@
 return {
 	"nvim-lua/plenary.nvim",
+	"lewis6991/gitsigns.nvim",
 	{
 		"catgoose/nvim-colorizer.lua",
 		config = function() require("colorizer").setup() end,
