@@ -33,5 +33,7 @@ return {
 				},
 			},
 		})
+
+		vim.lsp.enable("gdscript")
 	end,
 }
