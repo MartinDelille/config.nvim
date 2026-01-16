@@ -44,6 +44,7 @@ return {
 		scroll = { enabled = true },
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
+		terminal = {},
 	},
 	keys = {
 		-- Top Pickers
@@ -83,5 +84,6 @@ return {
 		{ "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
 		-- Notifications
 		{ "<leader>nn", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+		{ "<leader>tm", function() Snacks.terminal.open("make", { interactive = false, win = { position = "bottom" } }) end, desc = "Run Make in Terminal" },
 	},
 }
