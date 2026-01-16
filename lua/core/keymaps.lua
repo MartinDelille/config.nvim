@@ -20,7 +20,4 @@ keymap.set("n", "<S-tab>", function() vim.cmd.bprevious() end, { desc = "Go to p
 -- Update lazy plugins
 keymap.set("n", "<leader>lz", function() vim.cmd.Lazy("update") end, { desc = "Update lazy plugins" })
 
--- Run make
-keymap.set("n", "<leader>mm", function() vim.cmd.terminal("make") end, { desc = "Run make" })
-
 keymap.set("n", "<leader>yp", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, { desc = "Yank file path to clipboard" })
