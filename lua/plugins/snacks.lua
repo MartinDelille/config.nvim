@@ -84,6 +84,7 @@ return {
 		{ "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
 		-- Notifications
 		{ "<leader>nn", function() Snacks.notifier.show_history() end, desc = "Notification History" },
-		{ "<leader>tm", function() Snacks.terminal.open("make", { interactive = false, win = { position = "bottom" } }) end, desc = "Run Make in Terminal" },
+		{ "<leader>mm", function() Snacks.terminal.open("make", { interactive = false, win = { position = "bottom" } }) end, desc = "Run Make in Terminal" },
+		{ "<leader>mt", function() Snacks.terminal.open() end, desc = "Open Terminal" },
 	},
 }
