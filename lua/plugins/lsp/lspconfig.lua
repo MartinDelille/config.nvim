@@ -7,41 +7,6 @@ return {
 		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
-		-- GDScript LSP (connects to Godot editor's built-in LSP on port 6005)
-		vim.lsp.config("gdscript", {
-			cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
-			filetypes = { "gdscript" },
-			root_markers = { "project.godot" },
-			on_attach = function(client, bufnr)
-				vim.notify("GDScript LSP connected", vim.log.levels.INFO)
-			end,
-		})
-
-		vim.lsp.enable("gdscript")
-
-		-- Notify when Godot LSP fails to connect
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "gdscript",
-			callback = function()
-				vim.defer_fn(function()
-					local clients = vim.lsp.get_clients({ name = "gdscript" })
-					if #clients == 0 then
-						vim.notify("GDScript LSP not connected. Is Godot editor running?", vim.log.levels.WARN)
-					end
-				end, 2000)
-			end,
-		})
-
-		vim.lsp.config("lua_ls", {
-			settings = {
-				Lua = {
-					diagnostics = {
-						globals = { "vim" },
-					},
-				},
-			},
-		})
-
 		-- import mason_lspconfig plugin
 		local mason_lspconfig = require("mason-lspconfig")
 
