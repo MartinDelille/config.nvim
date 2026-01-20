@@ -23,6 +23,8 @@ return {
 				header = require("ascii.pacman_ghost"),
 			},
 		},
+		explorer = { enabled = true },
+		image = { enabled = true },
 		indent = { enabled = true },
 		input = { enabled = true },
 		picker = {
@@ -51,6 +53,7 @@ return {
 		{ "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
 		{ "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
 		{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+		{ "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 		-- find
 		{ "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
 		-- git
