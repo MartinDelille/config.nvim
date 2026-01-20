@@ -4,6 +4,7 @@ return {
 	config = function()
 		local lualine = require("lualine")
 		lualine.setup({
+			extensions = { "quickfix" },
 			sections = {
 				lualine_c = {
 					{

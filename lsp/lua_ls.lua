@@ -7,6 +7,9 @@ return {
 					vim.env.VIMRUNTIME,
 				},
 			},
+			diagnostics = {
+				disable = { "missing-fields" },
+			},
 		},
 	},
 }
