@@ -38,6 +38,7 @@ return {
 				"pyright",
 				"ts_ls",
 				"angularls",
+				"qmlls",
 			},
 		})
 
