@@ -49,6 +49,7 @@ return {
 				"cpplint",
 				"cmakelint",
 				"debugpy",
+				"js-debug-adapter",
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
 				"isort", -- python formatter

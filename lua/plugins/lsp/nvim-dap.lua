@@ -56,5 +56,45 @@ return {
 				stopOnEntry = false,
 			},
 		}
+		dap.adapters["pwa-node"] = {
+			id = "pwa-node",
+			type = "server",
+			host = "localhost",
+			port = 8123,
+			executable = {
+				command = "js-debug-adapter",
+				args = {
+					"8123",
+				},
+			},
+		}
+		dap.adapters["pwa-chrome"] = dap.adapters["pwa-node"]
+
+		dap.configurations.javascript = {
+			{
+				type = "pwa-node",
+				request = "launch",
+				name = "Electron Main",
+				runtimeExecutable = "${workspaceFolder}/node_modules/.bin/electron",
+				args = { ".", "--remote-debugging-port=9222" },
+				cwd = "${workspaceFolder}",
+				sourceMaps = true,
+				protocol = "inspector",
+				console = "integratedTerminal",
+				resolveSourceMapLocations = {
+					"${workspaceFolder}/**",
+					"!**/node_modules/**",
+				},
+			},
+			{
+				type = "pwa-chrome",
+				request = "attach",
+				name = "Electron Renderer",
+				port = 9222,
+				webRoot = "${workspaceFolder}",
+				sourceMaps = true,
+				protocol = "inspector",
+			},
+		}
 	end,
 }
