@@ -33,6 +33,12 @@ return {
 						always_accept = { modes = { n = "<leader>cy" } },
 					},
 				},
+				chat = {
+					keymaps = {
+						next_chat = false,
+						previous_chat = false,
+					},
+				},
 			},
 			extensions = {
 				history = {
