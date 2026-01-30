@@ -19,12 +19,8 @@ return {
 			type = "server",
 			port = "${port}",
 			executable = {
-				-- CHANGE THIS to your path!
 				command = "codelldb",
 				args = { "--port", "${port}" },
-
-				-- On windows you may have to uncomment this:
-				-- detached = false,
 			},
 		}
 		dap.configurations.cpp = {
@@ -35,6 +31,9 @@ return {
 				program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file") end,
 				cwd = "${workspaceFolder}",
 				stopOnEntry = false,
+				preRunCommands = {
+					"breakpoint name configure --disable cpp_exception",
+				},
 			},
 		}
 		dap.adapters["pwa-node"] = {
