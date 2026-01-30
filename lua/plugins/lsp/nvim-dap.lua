@@ -1,36 +1,17 @@
 return {
 	"mfussenegger/nvim-dap",
 	keys = {
-		{
-			"<leader>db",
-			"<cmd>DapToggleBreakpoint<CR>",
-			mode = "n",
-			desc = "Add a breakpoint at line",
-		},
-		{
-			"<leader>dr",
-			"<cmd>DapContinue<CR>",
-			mode = "n",
-			desc = "Start or continue the debugger",
-		},
-		{
-			"<leader>di",
-			"<cmd>DapStepInto<CR>",
-			mode = "n",
-			desc = "Step Into",
-		},
-		{
-			"<leader>do",
-			"<cmd>DapStepOver<CR>",
-			mode = "n",
-			desc = "Step Over",
-		},
-		{
-			"<leader>dt",
-			"<cmd>DapTerminate<CR>",
-			mode = "n",
-			desc = "Terminate the debugging session",
-		},
+		{ "<leader>db", mode = "n", desc = "Add a breakpoint at line", function() require("dap").toggle_breakpoint() end },
+		{ "<F9>", mode = "n", desc = "Add a breakpoint at line", function() require("dap").toggle_breakpoint() end },
+		{ "<leader>dr", mode = "n", desc = "Start or continue the debugger", function() require("dap").continue() end },
+		{ "<F5>", mode = "n", desc = "Start or continue the debugger", function() require("dap").continue() end },
+		{ "<leader>di", mode = "n", desc = "Step Into", function() require("dap").step_into() end },
+		{ "<leader>do", mode = "n", desc = "Step Over", function() require("dap").step_over() end },
+		{ "<F8>", mode = "n", desc = "Step Over", function() require("dap").step_over() end },
+		{ "<leader>dt", mode = "n", desc = "Terminate the debugging session", function() require("dap").terminate() end },
+		{ "<leader>du", mode = "n", desc = "Step Out", function() require("dap").step_out() end },
+		{ "<leader>dc", mode = "n", desc = "Continue to cursor", function() require("dap").run_to_cursor() end },
+		{ "<F11>", mode = "n", desc = "Continue to cursor", function() require("dap").run_to_cursor() end },
 	},
 	config = function()
 		local dap = require("dap")
