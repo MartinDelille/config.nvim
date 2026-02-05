@@ -63,3 +63,4 @@ function disable_resize_mode()
 end
 
 vim.keymap.set("n", "<leader>wr", enable_resize_mode, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>wo", function() vim.cmd("write") end, { desc = "Write the current buffer" })
