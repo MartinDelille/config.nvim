@@ -37,3 +37,10 @@ keymap.set("n", "<leader>yd", function()
 		print("Diagnostic yanked")
 	end
 end, { desc = "Yank diagnostic under cursor" })
+
+vim.keymap.set("n", "<leader>wo", function() vim.cmd("write") end, { desc = "Write the current buffer" })
+vim.keymap.set("n", "<leader>xx", function()
+	vim.cmd("write")
+	vim.cmd("luafile %")
+end, { desc = "Run the current buffer" })
+vim.keymap.set("t", "<esc><esc>", "<C-\\><C-n>", { desc = "Exit terminal mode with double Esc" })
