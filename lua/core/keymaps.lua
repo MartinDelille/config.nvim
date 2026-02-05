@@ -37,3 +37,35 @@ keymap.set("n", "<leader>yd", function()
 		vim.notify("Diagnostic yanked")
 	end
 end, { desc = "Yank diagnostic under cursor" })
+
+vim.keymap.set("n", "<leader>wo", function() vim.cmd("write") end, { desc = "Write the current buffer" })
+vim.keymap.set("n", "<leader>xx", function()
+	local buf = vim.api.nvim_get_current_buf()
+	utils.write_if_writable(buf)
+	local config_table = {
+		["lua"] = { cmd = "luafile %", mode = "command" },
+		["sh"] = { cmd = "bash", mode = "terminal" },
+	}
+	local ft = vim.bo[buf].filetype
+	local path = vim.api.nvim_buf_get_name(buf)
+	local filename = vim.fn.fnamemodify(path, ":t")
+	local config = config_table[ft]
+	if config == nil then
+		local file_table = {
+			[".tmux.conf"] = { cmd = "!tmux source-file", mode = "command" },
+		}
+		config = file_table[filename]
+	end
+
+	if config then
+		if config.mode == "terminal" then
+			local term = Snacks.terminal.open(config.cmd .. " " .. path, {
+				win = { position = "right" },
+				auto_close = true,
+			})
+		else
+			vim.cmd(config.cmd)
+		end
+	end
+end, { desc = "Run the current buffer" })
+vim.keymap.set("t", "<esc><esc>", "<C-\\><C-n>", { desc = "Exit terminal mode with double Esc" })
