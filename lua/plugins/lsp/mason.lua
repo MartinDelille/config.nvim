@@ -38,6 +38,7 @@ return {
 				"pyright",
 				"ts_ls",
 				"angularls",
+				"qmlls",
 			},
 		})
 
@@ -48,10 +49,12 @@ return {
 				"cpplint",
 				"cmakelint",
 				"debugpy",
-				"prettier", -- prettier formatter
-				"stylua", -- lua formatter
-				"isort", -- python formatter
-				"black", -- python formatter
+				"js-debug-adapter",
+				"prettier",
+				"stylelint",
+				"stylua",
+				"isort",
+				"black",
 				"pylint",
 				"eslint_d",
 				"rust-analyzer",

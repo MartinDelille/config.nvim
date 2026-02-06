@@ -13,16 +13,30 @@ return {
 			"nvim-lua/plenary.nvim",
 			"ravitemer/codecompanion-history.nvim",
 		},
+		interactions = {
+			chat = {
+				model = "claude-sonnet",
+			},
+		},
 		keys = {
 			{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Code Companion" },
 		},
 		opts = {
+			action_palette = {
+				provider = "snacks",
+			},
 			strategies = {
 				inline = {
 					keymaps = {
 						accept_change = { modes = { n = "<leader>ca" } },
 						reject_change = { modes = { n = "<leader>cr" } },
 						always_accept = { modes = { n = "<leader>cy" } },
+					},
+				},
+				chat = {
+					keymaps = {
+						next_chat = false,
+						previous_chat = false,
 					},
 				},
 			},

@@ -13,7 +13,15 @@ return {
 					{ icon = " ", key = "f", desc = "Find File", action = function() Snacks.dashboard.pick("files") end },
 					{ icon = " ", key = "n", desc = "New File", action = function() vim.cmd("ene | startinsert") end },
 					{ icon = " ", key = "t", desc = "Find Text", action = function() Snacks.dashboard.pick("live_grep") end },
-					{ icon = " ", key = "g", desc = "Copilot Chat", action = "<cmd>Lazy load codecompanion.nvim<CR><cmd>CodeCompanionChat<CR><cmd>only<CR>" },
+					{
+						icon = " ",
+						key = "g",
+						desc = "Copilot Chat",
+						action = function()
+							require("codecompanion").chat({})
+							vim.cmd("only")
+						end,
+					},
 					{ icon = " ", key = "r", desc = "Recent Files", action = function() Snacks.dashboard.pick("oldfiles") end },
 					{ icon = " ", key = "c", desc = "Config", action = function() Snacks.dashboard.pick("files", { cwd = vim.fn.stdpath("config") }) end },
 					{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
@@ -23,11 +31,17 @@ return {
 				header = require("ascii.pacman_ghost"),
 			},
 		},
+		explorer = { enabled = true },
+		image = { enabled = true },
 		indent = { enabled = true },
 		input = { enabled = true },
 		picker = {
 			enabled = true,
 			hidden = true,
+			exclude = {
+				"**/.git/*",
+				"**/node_modules/*",
+			},
 			sources = {
 				colorschemes = {
 					confirm = function(picker, item)
@@ -44,6 +58,7 @@ return {
 		scroll = { enabled = true },
 		statuscolumn = { enabled = true },
 		words = { enabled = true },
+		terminal = {},
 	},
 	keys = {
 		-- Top Pickers
@@ -51,6 +66,7 @@ return {
 		{ "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
 		{ "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
 		{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+		{ "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 		-- find
 		{ "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
 		-- git
@@ -83,5 +99,7 @@ return {
 		{ "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
 		-- Notifications
 		{ "<leader>nn", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+		{ "<leader>mm", function() Snacks.terminal.open("make", { interactive = false, win = { position = "bottom" } }) end, desc = "Run Make in Terminal" },
+		{ "<leader>mt", function() Snacks.terminal.open() end, desc = "Open Terminal" },
 	},
 }
