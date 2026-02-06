@@ -13,7 +13,15 @@ return {
 					{ icon = " ", key = "f", desc = "Find File", action = function() Snacks.dashboard.pick("files") end },
 					{ icon = " ", key = "n", desc = "New File", action = function() vim.cmd("ene | startinsert") end },
 					{ icon = " ", key = "t", desc = "Find Text", action = function() Snacks.dashboard.pick("live_grep") end },
-					{ icon = " ", key = "g", desc = "Copilot Chat", action = "<cmd>Lazy load codecompanion.nvim<CR><cmd>CodeCompanionChat<CR><cmd>only<CR>" },
+					{
+						icon = " ",
+						key = "g",
+						desc = "Copilot Chat",
+						action = function()
+							require("codecompanion").chat({})
+							vim.cmd("only")
+						end,
+					},
 					{ icon = " ", key = "r", desc = "Recent Files", action = function() Snacks.dashboard.pick("oldfiles") end },
 					{ icon = " ", key = "c", desc = "Config", action = function() Snacks.dashboard.pick("files", { cwd = vim.fn.stdpath("config") }) end },
 					{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
@@ -30,6 +38,10 @@ return {
 		picker = {
 			enabled = true,
 			hidden = true,
+			exclude = {
+				"**/.git/*",
+				"**/node_modules/*",
+			},
 			sources = {
 				colorschemes = {
 					confirm = function(picker, item)
