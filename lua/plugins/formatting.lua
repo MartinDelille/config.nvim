@@ -17,15 +17,9 @@ return {
 				markdown = { "prettier" },
 				liquid = { "prettier" },
 				lua = { "stylua" },
-				python = { "isort", "black" },
 				gdscript = { "gdformat" },
 				gdshader = { "clang-format" },
 				sh = { "shfmt" },
-			},
-			formatters = {
-				black = {
-					prepend_args = { "--fast" },
-				},
 			},
 			format_on_save = function(bufnr)
 				-- Disable with a global or buffer-local variable

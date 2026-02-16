@@ -53,8 +53,6 @@ return {
 				"prettier",
 				"stylelint",
 				"stylua",
-				"isort",
-				"black",
 				"pylint",
 				"eslint_d",
 				"rust-analyzer",
