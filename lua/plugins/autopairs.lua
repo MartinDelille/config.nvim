@@ -17,6 +17,7 @@ return {
 				java = false, -- don't check treesitter on java
 			},
 		})
+		autopairs.remove_rule("`")
 
 		-- import nvim-autopairs completion functionality
 		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
