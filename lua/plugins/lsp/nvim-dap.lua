@@ -1,5 +1,9 @@
 return {
 	"mfussenegger/nvim-dap",
+	dependencies = {
+		"theHamsta/nvim-dap-virtual-text",
+		opts = { virt_text_pos = "eol" },
+	},
 	keys = {
 		{ "<leader>db", mode = "n", desc = "Add a breakpoint at line", function() require("dap").toggle_breakpoint() end },
 		{ "<F9>", mode = "n", desc = "Add a breakpoint at line", function() require("dap").toggle_breakpoint() end },

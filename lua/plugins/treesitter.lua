@@ -37,6 +37,7 @@ return {
 				"query",
 				"vimdoc",
 				"c",
+				"cpp",
 				"gdscript",
 				"godot_resource",
 				"gdshader",
