@@ -43,6 +43,7 @@ vim.keymap.set("n", "<leader>mq", function()
 end, { desc = "Run Make" })
 
 vim.keymap.set("n", "<leader>wo", function() vim.cmd("write") end, { desc = "Write the current buffer" })
+vim.keymap.set("n", "<leader>wa", function() vim.cmd("wall") end, { desc = "Write all buffer" })
 vim.keymap.set("n", "<leader>xx", function()
 	local buf = vim.api.nvim_get_current_buf()
 	utils.write_if_writable(buf)
