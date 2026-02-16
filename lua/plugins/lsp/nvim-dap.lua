@@ -28,7 +28,15 @@ return {
 				name = "Launch file",
 				type = "codelldb",
 				request = "launch",
-				program = function() return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file") end,
+				program = function()
+					local executable = os.getenv("EXECUTABLE")
+					vim.notify(string.format("EXECUTABLE: %s", executable or "nil"))
+					if executable then
+						return executable
+					else
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+					end
+				end,
 				cwd = "${workspaceFolder}",
 				stopOnEntry = false,
 				preRunCommands = {
