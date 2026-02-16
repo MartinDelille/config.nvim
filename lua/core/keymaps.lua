@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 -- set leader key to space
 vim.g.mapleader = " "
 
