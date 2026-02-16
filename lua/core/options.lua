@@ -64,3 +64,8 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	command = "setlocal wrap",
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = "*.comptine",
+	callback = function() vim.bo.filetype = "yaml" end,
+})
