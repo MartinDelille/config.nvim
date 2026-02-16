@@ -36,6 +36,12 @@ keymap.set("n", "<leader>yd", function()
 	end
 end, { desc = "Yank diagnostic under cursor" })
 
+vim.keymap.set("n", "<leader>mq", function()
+	utils.write_if_writable()
+	vim.fn.setqflist({}, "r") -- reset quickfix list
+	vim.cmd("make")
+end, { desc = "Run Make" })
+
 vim.keymap.set("n", "<leader>wo", function() vim.cmd("write") end, { desc = "Write the current buffer" })
 vim.keymap.set("n", "<leader>xx", function()
 	local buf = vim.api.nvim_get_current_buf()
