@@ -6,6 +6,7 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
+				make = { "bake" },
 				javascript = { "prettier" },
 				css = { "prettier" },
 				scss = { "stylelint" },

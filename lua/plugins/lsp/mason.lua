@@ -53,6 +53,7 @@ return {
 				"prettier",
 				"stylelint",
 				"stylua",
+				"mbake",
 				"pylint",
 				"eslint_d",
 				"rust-analyzer",
