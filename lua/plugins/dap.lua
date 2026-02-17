@@ -23,11 +23,12 @@ return {
 				handles = {},
 			},
 		},
+		"Weissle/persistent-breakpoints.nvim",
 		"mfussenegger/nvim-dap-python",
 	},
 	keys = {
-		{ "<leader>db", mode = "n", desc = "Add a breakpoint at line", function() require("dap").toggle_breakpoint() end },
-		{ "<F9>", mode = "n", desc = "Add a breakpoint at line", function() require("dap").toggle_breakpoint() end },
+		{ "<leader>db", mode = "n", desc = "Add a breakpoint at line", function() require("persistent-breakpoints.api").toggle_breakpoint() end },
+		{ "<F9>", mode = "n", desc = "Add a breakpoint at line", function() require("persistent-breakpoints.api").toggle_breakpoint() end },
 		{ "<leader>dr", mode = "n", desc = "Start or continue the debugger", function() require("dap").continue() end },
 		{ "<F5>", mode = "n", desc = "Start or continue the debugger", function() require("dap").continue() end },
 		{ "<leader>di", mode = "n", desc = "Step Into", function() require("dap").step_into() end },
@@ -46,6 +47,9 @@ return {
 		dap.listeners.after.event_terminated["dapui_config"] = function() dapui.close() end
 		dap.listeners.after.event_exited["dapui_config"] = function() dapui.close() end
 
+		require("persistent-breakpoints").setup({
+			load_breakpoints_event = { "BufReadPost" },
+		})
 		require("dap-python").setup("uv")
 
 		dap.adapters.codelldb = {
