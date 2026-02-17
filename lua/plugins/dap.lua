@@ -1,8 +1,29 @@
 return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
-		"theHamsta/nvim-dap-virtual-text",
-		opts = { virt_text_pos = "eol" },
+		{
+			"theHamsta/nvim-dap-virtual-text",
+			opts = { virt_text_pos = "eol" },
+		},
+		{
+			"rcarriga/nvim-dap-ui",
+			event = "VeryLazy",
+			dependencies = {
+				"nvim-neotest/nvim-nio",
+			},
+			opts = {},
+		},
+		{
+			"jay-babu/mason-nvim-dap.nvim",
+			event = "VeryLazy",
+			dependencies = {
+				"mason-org/mason.nvim",
+			},
+			opts = {
+				handles = {},
+			},
+		},
+		"mfussenegger/nvim-dap-python",
 	},
 	keys = {
 		{ "<leader>db", mode = "n", desc = "Add a breakpoint at line", function() require("dap").toggle_breakpoint() end },
@@ -16,9 +37,17 @@ return {
 		{ "<leader>du", mode = "n", desc = "Step Out", function() require("dap").step_out() end },
 		{ "<leader>dc", mode = "n", desc = "Continue to cursor", function() require("dap").run_to_cursor() end },
 		{ "<F11>", mode = "n", desc = "Continue to cursor", function() require("dap").run_to_cursor() end },
+		{ "<leader>du", mode = { "n", "x" }, function() require("dapui").toggle() end, desc = "Toggle DAP UI" },
 	},
 	config = function()
 		local dap = require("dap")
+		local dapui = require("dapui")
+		dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
+		dap.listeners.after.event_terminated["dapui_config"] = function() dapui.close() end
+		dap.listeners.after.event_exited["dapui_config"] = function() dapui.close() end
+
+		require("dap-python").setup("uv")
+
 		dap.adapters.codelldb = {
 			type = "server",
 			port = "${port}",
