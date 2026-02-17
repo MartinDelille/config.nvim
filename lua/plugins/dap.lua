@@ -74,6 +74,12 @@ return {
 						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
 					end
 				end,
+				args = function()
+					local arguments = os.getenv("ARGUMENTS")
+					vim.notify(string.format("ARGUMENTS: %s", arguments or "nil"))
+					if arguments then return vim.split(arguments, " ") end
+					return {}
+				end,
 				cwd = "${workspaceFolder}",
 				stopOnEntry = false,
 				preRunCommands = {
