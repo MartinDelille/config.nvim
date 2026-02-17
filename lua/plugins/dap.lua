@@ -67,6 +67,13 @@ return {
 				request = "launch",
 				program = function()
 					local executable = os.getenv("EXECUTABLE")
+					-- check if executable exists and is executable
+					if executable and vim.fn.executable(executable) == 1 then
+						vim.notify(string.format("Found executable: %s", executable))
+					else
+						vim.notify(string.format("Executable not found or not executable: %s", executable or "nil"))
+						executable = nil
+					end
 					vim.notify(string.format("EXECUTABLE: %s", executable or "nil"))
 					if executable then
 						return executable
