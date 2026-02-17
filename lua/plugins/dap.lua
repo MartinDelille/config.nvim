@@ -6,12 +6,11 @@ return {
 			opts = { virt_text_pos = "eol" },
 		},
 		{
-			"rcarriga/nvim-dap-ui",
-			event = "VeryLazy",
-			dependencies = {
-				"nvim-neotest/nvim-nio",
+			"igorlfs/nvim-dap-view",
+			opts = {
+				switchbuf = "useopen",
+				auto_toggle = true,
 			},
-			opts = {},
 		},
 		{
 			"jay-babu/mason-nvim-dap.nvim",
@@ -38,14 +37,10 @@ return {
 		{ "<leader>du", mode = "n", desc = "Step Out", function() require("dap").step_out() end },
 		{ "<leader>dc", mode = "n", desc = "Continue to cursor", function() require("dap").run_to_cursor() end },
 		{ "<F11>", mode = "n", desc = "Continue to cursor", function() require("dap").run_to_cursor() end },
-		{ "<leader>du", mode = { "n", "x" }, function() require("dapui").toggle() end, desc = "Toggle DAP UI" },
+		{ "<leader>du", mode = { "n", "x" }, function() require("dap-view").toggle() end, desc = "Toggle DAP UI" },
 	},
 	config = function()
 		local dap = require("dap")
-		local dapui = require("dapui")
-		dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
-		dap.listeners.after.event_terminated["dapui_config"] = function() dapui.close() end
-		dap.listeners.after.event_exited["dapui_config"] = function() dapui.close() end
 
 		require("persistent-breakpoints").setup({
 			load_breakpoints_event = { "BufReadPost" },
