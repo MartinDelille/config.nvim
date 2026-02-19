@@ -3,5 +3,4 @@ return {
 	{ "rhysd/conflict-marker.vim" },
 	{ "habamax/vim-godot", event = "VimEnter" },
 	{ "Kicamon/markdown-table-mode.nvim", config = true },
-	{ "subnut/nvim-ghost.nvim" },
 }
