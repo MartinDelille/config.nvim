@@ -14,7 +14,14 @@ return {
 			"ravitemer/codecompanion-history.nvim",
 		},
 		keys = {
-			{ "<leader>cc", "<cmd>CodeCompanionChat Toggle<cr>", desc = "Code Companion" },
+			{
+				"<leader>cc",
+				function()
+					require("codecompanion").toggle()
+					vim.cmd("wincmd =")
+				end,
+				desc = "Code Companion",
+			},
 		},
 		opts = {
 			strategies = {
