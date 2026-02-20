@@ -42,3 +42,5 @@ vim.diagnostic.config({
 		},
 	},
 })
+
+vim.lsp.enable("gdscript")
