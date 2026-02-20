@@ -13,6 +13,11 @@ return {
 			"nvim-lua/plenary.nvim",
 			"ravitemer/codecompanion-history.nvim",
 		},
+		interactions = {
+			chat = {
+				model = "claude-sonnet",
+			},
+		},
 		keys = {
 			{
 				"<leader>cc",
@@ -24,6 +29,9 @@ return {
 			},
 		},
 		opts = {
+			action_palette = {
+				provider = "snacks",
+			},
 			strategies = {
 				inline = {
 					keymaps = {
