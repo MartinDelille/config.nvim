@@ -47,6 +47,9 @@ return {
 		})
 		require("dap-python").setup("uv")
 
+		vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapStopped", { text = "➡️", texthl = "", linehl = "debugPC", numhl = "" })
+
 		dap.adapters.codelldb = {
 			type = "server",
 			port = "${port}",
