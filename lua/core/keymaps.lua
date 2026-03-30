@@ -50,6 +50,7 @@ vim.keymap.set("n", "<leader>xx", function()
 	local config_table = {
 		["lua"] = { cmd = "luafile %", mode = "command" },
 		["sh"] = { cmd = "bash", mode = "terminal" },
+		["javascript"] = { cmd = "node", mode = "terminal" },
 	}
 	local ft = vim.bo[buf].filetype
 	local path = vim.api.nvim_buf_get_name(buf)
@@ -64,9 +65,9 @@ vim.keymap.set("n", "<leader>xx", function()
 
 	if config then
 		if config.mode == "terminal" then
-			local term = Snacks.terminal.open(config.cmd .. " " .. path, {
+			Snacks.terminal.open(config.cmd .. " " .. path, {
 				win = { position = "right" },
-				auto_close = true,
+				auto_close = false,
 			})
 		else
 			vim.cmd(config.cmd)
