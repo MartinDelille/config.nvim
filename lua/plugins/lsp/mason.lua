@@ -47,7 +47,6 @@ return {
 				"clang-format",
 				"codelldb",
 				"cpplint",
-				"cmakelint",
 				"debugpy",
 				"js-debug-adapter",
 				"prettier",

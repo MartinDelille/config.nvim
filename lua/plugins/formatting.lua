@@ -7,6 +7,7 @@ return {
 		conform.setup({
 			formatters_by_ft = {
 				make = { "bake" },
+				cmake = { "gersemi" },
 				javascript = { "prettier" },
 				css = { "prettier" },
 				scss = { "stylelint" },
