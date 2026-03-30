@@ -1,3 +1,16 @@
+local utils = require("utils")
+
+local function do_make(opts)
+	utils.write_if_writable()
+	vim.cmd.rshada()
+	local term = Snacks.terminal.open("make " .. vim.g.MAKE_TARGET, {
+		interactive = false,
+		win = { position = "right" },
+		auto_close = opts and opts.auto_close or true,
+	})
+	utils.move_cursor_to_end({ buf = term.scratch_buf, win = term.win })
+end
+
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
@@ -99,7 +112,48 @@ return {
 		{ "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
 		-- Notifications
 		{ "<leader>nn", function() Snacks.notifier.show_history() end, desc = "Notification History" },
-		{ "<leader>mm", function() Snacks.terminal.open("make", { interactive = false, win = { position = "bottom" } }) end, desc = "Run Make in Terminal" },
+		{
+			"<leader>mm",
+			function() do_make() end,
+			desc = "Run Make in Terminal",
+		},
+		{
+			"<leader>ms",
+			function()
+				utils.write_if_writable()
+				-- Parse Makefile for targets
+				local makefile = "Makefile"
+				local f = io.open(makefile, "r")
+				if not f then
+					vim.notify("Makefile not found in current directory", vim.log.levels.WARN)
+					return
+				end
+				f:close()
+
+				local targets = {}
+				for line in io.lines(makefile) do
+					local target = line:match("^([%w-_%.]+):")
+					if target and target ~= ".PHONY" then table.insert(targets, target) end
+				end
+				if #targets == 0 then
+					vim.notify("No make targets found", vim.log.levels.WARN)
+					return
+				end
+
+				local items = {}
+				for _, t in ipairs(targets) do
+					table.insert(items, t)
+				end
+
+				Snacks.picker.select(items, { prompt = "Make Targets" }, function(item)
+					if type(item) ~= "string" or item == "" then return end
+					vim.g.MAKE_TARGET = item
+					vim.cmd.wshada()
+					do_make()
+				end)
+			end,
+			desc = "Select and Run Make Target",
+		},
 		{ "<leader>mt", function() Snacks.terminal.open() end, desc = "Open Terminal" },
 	},
 }
