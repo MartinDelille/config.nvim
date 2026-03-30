@@ -1,14 +1,8 @@
-return {
-	"sontungexpt/url-open",
-	cmd = "URLOpenUnderCursor",
-	keys = {
-		{ "<leader>gx", function() vim.cmd.URLOpenUnderCursor() end, desc = "Open URL under cursor" },
-	},
-	open_only_when_cursor_on_url = false,
-	config = function()
-		local status_ok, url_open = pcall(require, "url-open")
-		if not status_ok then return end
+vim.pack.add({ "https://github.com/sontungexpt/url-open" })
 
-		url_open.setup({})
-	end,
-}
+local url_open = require("url-open")
+
+url_open.setup({
+	open_only_when_cursor_on_url = false,
+})
+vim.keymap.set("n", "<leader>gx", function() vim.cmd.URLOpenUnderCursor() end, { desc = "Open URL under cursor" })

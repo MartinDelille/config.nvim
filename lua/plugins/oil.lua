@@ -1,15 +1,12 @@
-return {
-	"stevearc/oil.nvim",
-	---@module 'oil'
-	---@type oil.SetupOpts
-	opts = {
-		git = {
-			mv = function(src_path, dest_path) return true end,
-		},
+vim.pack.add({ "https://github.com/stevearc/oil.nvim" })
+
+require("mini.icons").setup({})
+
+local oil = require("oil")
+oil.setup({
+	git = {
+		mv = function(_, _) return true end,
 	},
-	keys = {
-		{ "-", function() vim.cmd("Oil") end, desc = "Open parent directory" },
-	},
-	dependencies = { { "nvim-mini/mini.icons", opts = {} } },
-	lazy = false,
-}
+})
+
+vim.keymap.set("n", "-", function() oil.open() end, { desc = "Open parent directory" })
