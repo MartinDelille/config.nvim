@@ -1,4 +1,4 @@
 require("core")
-require("lazy_config")
 require("themes")
+require("plugins")
 vim.cmd("colorscheme " .. get_colorscheme("default"))
