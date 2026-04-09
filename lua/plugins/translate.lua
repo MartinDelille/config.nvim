@@ -1,17 +1,12 @@
-return {
-	"uga-rosa/translate.nvim",
-	config = function()
-		require("translate").setup({
-			default = {
-				command = "google",
-				source_lang = "auto",
-				target_lang = "en",
-				output = "replace",
-			},
-		})
-	end,
-	keys = {
-		{ "<leader>tr", "viw<cmd>Translate en -output=replace<CR>", mode = "n", desc = "Translate word under cursor and replace" },
-		{ "<leader>tr", "<cmd>Translate en -output=replace<CR>", mode = "v", desc = "Translate selection and replace" },
+vim.pack.add({ "https://github.com/uga-rosa/translate.nvim" })
+require("translate").setup({
+	default = {
+		command = "google",
+		source_lang = "auto",
+		target_lang = "en",
+		output = "replace",
 	},
-}
+})
+
+vim.keymap.set("n", "<leader>tr", "viw<cmd>Translate en -output=replace<CR>", { desc = "Translate word under cursor and replace" })
+vim.keymap.set("v", "<leader>tr", "<cmd>Translate en -output=replace<CR>", { desc = "Translate selection and replace" })
