@@ -2,6 +2,8 @@ require("core/options")
 require("core/keymaps")
 require("core/lsp")
 
+require("vim._core.ui2").enable({})
+
 ---@param fallback? string
 ---@return string|nil
 _G.get_colorscheme = function(fallback)
