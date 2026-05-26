@@ -33,7 +33,6 @@ mason_lspconfig.setup({
     "pyright",
     "ts_ls",
     "angularls",
-    "qmlls",
   },
 })
 
