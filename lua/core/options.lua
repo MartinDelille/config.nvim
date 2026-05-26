@@ -47,25 +47,25 @@ opt.autoread = true
 local custom_au_group = vim.api.nvim_create_augroup("custom_au_group", { clear = true })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
-	group = custom_au_group,
-	pattern = { "*" },
-	command = "if mode() != 'c' | checktime | endif",
+  group = custom_au_group,
+  pattern = { "*" },
+  command = "if mode() != 'c' | checktime | endif",
 })
 
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-	group = custom_au_group,
-	pattern = { "*" },
-	callback = function() vim.highlight.on_yank({ timeout = 200 }) end,
+  group = custom_au_group,
+  pattern = { "*" },
+  callback = function() vim.highlight.on_yank({ timeout = 200 }) end,
 })
 
 -- Set wrap option for markdown files only
 vim.api.nvim_create_autocmd("FileType", {
-	group = custom_au_group,
-	pattern = "markdown",
-	command = "setlocal wrap",
+  group = custom_au_group,
+  pattern = "markdown",
+  command = "setlocal wrap",
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = "*.comptine",
-	callback = function() vim.bo.filetype = "yaml" end,
+  pattern = "*.comptine",
+  callback = function() vim.bo.filetype = "yaml" end,
 })

@@ -6,74 +6,74 @@ local utils = require("utils")
 if vim.g.MAKE_AUTO_CLOSE == nil then vim.g.MAKE_AUTO_CLOSE = true end
 
 local function do_make(opts)
-	utils.write_if_writable()
-	vim.cmd.rshada()
-	local auto_close = vim.g.MAKE_AUTO_CLOSE
-	if opts and opts.auto_close ~= nil then auto_close = opts.auto_close end
-	local term = snacks.terminal.open("make " .. vim.g.MAKE_TARGET, {
-		interactive = false,
-		win = { position = "right" },
-		auto_close = auto_close,
-	})
-	utils.move_cursor_to_end({ buf = term.scratch_buf, win = term.win })
+  utils.write_if_writable()
+  vim.cmd.rshada()
+  local auto_close = vim.g.MAKE_AUTO_CLOSE
+  if opts and opts.auto_close ~= nil then auto_close = opts.auto_close end
+  local term = snacks.terminal.open("make " .. vim.g.MAKE_TARGET, {
+    interactive = false,
+    win = { position = "right" },
+    auto_close = auto_close,
+  })
+  utils.move_cursor_to_end({ buf = term.scratch_buf, win = term.win })
 end
 
 snacks.setup({
-	bigfile = { enabled = true },
-	dashboard = {
-		sections = {
-			{ section = "header" },
-			{ section = "keys", gap = 1, padding = 1 },
-		},
-		preset = {
-			keys = {
-				{ icon = " ", key = "f", desc = "Find File", action = function() snacks.dashboard.pick("files") end },
-				{ icon = " ", key = "n", desc = "New File", action = function() vim.cmd("ene | startinsert") end },
-				{ icon = " ", key = "t", desc = "Find Text", action = function() snacks.dashboard.pick("live_grep") end },
-				{
-					icon = " ",
-					key = "g",
-					desc = "Copilot Chat",
-					action = function()
-						require("codecompanion").chat({})
-						vim.cmd("only")
-					end,
-				},
-				{ icon = " ", key = "r", desc = "Recent Files", action = function() snacks.dashboard.pick("oldfiles") end },
-				{ icon = " ", key = "c", desc = "Config", action = function() snacks.dashboard.pick("files", { cwd = vim.fn.stdpath("config") }) end },
-				{ icon = " ", key = "s", desc = "Restore Session", section = "session" },
-				{ icon = " ", key = "q", desc = "Quit", action = function() vim.cmd("qa") end },
-			},
-			header = require("ascii.pacman_ghost"),
-		},
-	},
-	image = { enabled = true },
-	indent = { enabled = true },
-	input = { enabled = true },
-	picker = {
-		enabled = true,
-		hidden = true,
-		exclude = {
-			"**/.git/*",
-			"**/node_modules/*",
-		},
-		sources = {
-			colorschemes = {
-				confirm = function(picker, item)
-					local source = require("snacks.picker.config.sources").colorschemes
-					source.confirm(picker, item)
-					save_colorscheme(item.text)
-				end,
-			},
-		},
-	},
-	notifier = { enabled = true },
-	quickfile = { enabled = true },
-	scope = { enabled = true },
-	scroll = { enabled = true },
-	statuscolumn = { enabled = true },
-	words = { enabled = true },
-	terminal = {},
+  bigfile = { enabled = true },
+  dashboard = {
+    sections = {
+      { section = "header" },
+      { section = "keys", gap = 1, padding = 1 },
+    },
+    preset = {
+      keys = {
+        { icon = " ", key = "f", desc = "Find File", action = function() snacks.dashboard.pick("files") end },
+        { icon = " ", key = "n", desc = "New File", action = function() vim.cmd("ene | startinsert") end },
+        { icon = " ", key = "t", desc = "Find Text", action = function() snacks.dashboard.pick("live_grep") end },
+        {
+          icon = " ",
+          key = "g",
+          desc = "Copilot Chat",
+          action = function()
+            require("codecompanion").chat({})
+            vim.cmd("only")
+          end,
+        },
+        { icon = " ", key = "r", desc = "Recent Files", action = function() snacks.dashboard.pick("oldfiles") end },
+        { icon = " ", key = "c", desc = "Config", action = function() snacks.dashboard.pick("files", { cwd = vim.fn.stdpath("config") }) end },
+        { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+        { icon = " ", key = "q", desc = "Quit", action = function() vim.cmd("qa") end },
+      },
+      header = require("ascii.pacman_ghost"),
+    },
+  },
+  image = { enabled = true },
+  indent = { enabled = true },
+  input = { enabled = true },
+  picker = {
+    enabled = true,
+    hidden = true,
+    exclude = {
+      "**/.git/*",
+      "**/node_modules/*",
+    },
+    sources = {
+      colorschemes = {
+        confirm = function(picker, item)
+          local source = require("snacks.picker.config.sources").colorschemes
+          source.confirm(picker, item)
+          save_colorscheme(item.text)
+        end,
+      },
+    },
+  },
+  notifier = { enabled = true },
+  quickfile = { enabled = true },
+  scope = { enabled = true },
+  scroll = { enabled = true },
+  statuscolumn = { enabled = true },
+  words = { enabled = true },
+  terminal = {},
 })
 
 -- 		-- Top Pickers
@@ -115,42 +115,42 @@ vim.keymap.set("n", "<leader>sS", function() snacks.picker.lsp_workspace_symbols
 vim.keymap.set("n", "<leader>nn", function() snacks.notifier.show_history() end, { desc = "Notification History" })
 vim.keymap.set("n", "<leader>mm", function() do_make() end, { desc = "Run Make in Terminal" })
 vim.keymap.set("n", "<leader>mc", function()
-	vim.g.MAKE_AUTO_CLOSE = not vim.g.MAKE_AUTO_CLOSE
-	vim.cmd.wshada()
-	vim.notify("Make auto_close: " .. tostring(vim.g.MAKE_AUTO_CLOSE), vim.log.levels.INFO)
-	do_make()
+  vim.g.MAKE_AUTO_CLOSE = not vim.g.MAKE_AUTO_CLOSE
+  vim.cmd.wshada()
+  vim.notify("Make auto_close: " .. tostring(vim.g.MAKE_AUTO_CLOSE), vim.log.levels.INFO)
+  do_make()
 end, { desc = "Switch auto close terminal on make" })
 vim.keymap.set("n", "<leader>ms", function()
-	utils.write_if_writable()
-	-- Parse Makefile for targets
-	local makefile = "Makefile"
-	local f = io.open(makefile, "r")
-	if not f then
-		vim.notify("Makefile not found in current directory", vim.log.levels.WARN)
-		return
-	end
-	f:close()
+  utils.write_if_writable()
+  -- Parse Makefile for targets
+  local makefile = "Makefile"
+  local f = io.open(makefile, "r")
+  if not f then
+    vim.notify("Makefile not found in current directory", vim.log.levels.WARN)
+    return
+  end
+  f:close()
 
-	local targets = {}
-	for line in io.lines(makefile) do
-		local target = line:match("^([%w-_%.]+):")
-		if target and target ~= ".PHONY" then table.insert(targets, target) end
-	end
-	if #targets == 0 then
-		vim.notify("No make targets found", vim.log.levels.WARN)
-		return
-	end
+  local targets = {}
+  for line in io.lines(makefile) do
+    local target = line:match("^([%w-_%.]+):")
+    if target and target ~= ".PHONY" then table.insert(targets, target) end
+  end
+  if #targets == 0 then
+    vim.notify("No make targets found", vim.log.levels.WARN)
+    return
+  end
 
-	local items = {}
-	for _, t in ipairs(targets) do
-		table.insert(items, t)
-	end
+  local items = {}
+  for _, t in ipairs(targets) do
+    table.insert(items, t)
+  end
 
-	snacks.picker.select(items, { prompt = "Make Targets" }, function(item)
-		if type(item) ~= "string" or item == "" then return end
-		vim.g.MAKE_TARGET = item
-		vim.cmd.wshada()
-		do_make()
-	end)
+  snacks.picker.select(items, { prompt = "Make Targets" }, function(item)
+    if type(item) ~= "string" or item == "" then return end
+    vim.g.MAKE_TARGET = item
+    vim.cmd.wshada()
+    do_make()
+  end)
 end, { desc = "Select and Run Make Target" })
 vim.keymap.set("n", "<leader>mt", function() snacks.terminal.open() end, { desc = "Open Terminal" })

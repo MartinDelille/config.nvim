@@ -1,15 +1,15 @@
 vim.pack.add({ "https://github.com/Civitasv/cmake-tools.nvim" })
 require("cmake-tools").setup({
-	cmake_runner = {
-		name = "quickfix",
-		opts = {
-			show = "always",
-			position = "belowright",
-			size = 40,
-			encoding = "utf-8",
-			auto_close_when_success = false,
-		},
-	},
+  cmake_runner = {
+    name = "quickfix",
+    opts = {
+      show = "always",
+      position = "belowright",
+      size = 40,
+      encoding = "utf-8",
+      auto_close_when_success = false,
+    },
+  },
 })
 
 vim.keymap.set("n", "<leader>cg", function() vim.cmd.CMakeGenerate() end, { desc = "CMake generate" })

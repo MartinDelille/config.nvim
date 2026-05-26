@@ -1,10 +1,10 @@
 vim.pack.add({ "https://github.com/uga-rosa/translate.nvim" })
 require("translate").setup({
-	default = {
-		command = "google",
-		source_lang = "auto",
-		output = "replace",
-	},
+  default = {
+    command = "google",
+    source_lang = "auto",
+    output = "replace",
+  },
 })
 
 vim.keymap.set("n", "<leader>tre", "viw<cmd>Translate en -output=replace<CR>", { desc = "Translate word under cursor in english and replace" })

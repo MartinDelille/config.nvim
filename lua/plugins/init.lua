@@ -1,12 +1,12 @@
 vim.pack.add({
-	"https://github.com/nvim-lua/plenary.nvim",
-	"https://github.com/nvim-mini/mini.icons",
-	"https://github.com/rhysd/conflict-marker.vim",
-	"https://github.com/Kicamon/markdown-table-mode.nvim",
-	"https://github.com/ipkiss42/xwiki.vim",
-	"https://github.com/mustache/vim-mustache-handlebars",
-	"https://github.com/neovim/nvim-lspconfig",
-	{ src = "https://github.com/kylechui/nvim-surround", version = vim.version.range("4.0.0 - 5.0.0") },
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/nvim-mini/mini.icons",
+  "https://github.com/rhysd/conflict-marker.vim",
+  "https://github.com/Kicamon/markdown-table-mode.nvim",
+  "https://github.com/ipkiss42/xwiki.vim",
+  "https://github.com/mustache/vim-mustache-handlebars",
+  "https://github.com/neovim/nvim-lspconfig",
+  { src = "https://github.com/kylechui/nvim-surround", version = vim.version.range("4.0.0 - 5.0.0") },
 })
 
 require("plugins/treesitter")
