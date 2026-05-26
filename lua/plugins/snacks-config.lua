@@ -3,13 +3,17 @@ vim.pack.add({ "https://github.com/folke/snacks.nvim" })
 local snacks = require("snacks")
 local utils = require("utils")
 
+if vim.g.MAKE_AUTO_CLOSE == nil then vim.g.MAKE_AUTO_CLOSE = true end
+
 local function do_make(opts)
 	utils.write_if_writable()
 	vim.cmd.rshada()
+	local auto_close = vim.g.MAKE_AUTO_CLOSE
+	if opts and opts.auto_close ~= nil then auto_close = opts.auto_close end
 	local term = snacks.terminal.open("make " .. vim.g.MAKE_TARGET, {
 		interactive = false,
 		win = { position = "right" },
-		auto_close = opts and opts.auto_close or true,
+		auto_close = auto_close,
 	})
 	utils.move_cursor_to_end({ buf = term.scratch_buf, win = term.win })
 end
@@ -110,6 +114,12 @@ vim.keymap.set("n", "<leader>sS", function() snacks.picker.lsp_workspace_symbols
 -- Notifications
 vim.keymap.set("n", "<leader>nn", function() snacks.notifier.show_history() end, { desc = "Notification History" })
 vim.keymap.set("n", "<leader>mm", function() do_make() end, { desc = "Run Make in Terminal" })
+vim.keymap.set("n", "<leader>mc", function()
+	vim.g.MAKE_AUTO_CLOSE = not vim.g.MAKE_AUTO_CLOSE
+	vim.cmd.wshada()
+	vim.notify("Make auto_close: " .. tostring(vim.g.MAKE_AUTO_CLOSE), vim.log.levels.INFO)
+	do_make()
+end, { desc = "Switch auto close terminal on make" })
 vim.keymap.set("n", "<leader>ms", function()
 	utils.write_if_writable()
 	-- Parse Makefile for targets
