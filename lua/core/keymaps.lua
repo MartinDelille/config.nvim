@@ -36,7 +36,7 @@ keymap.set("n", "<leader>yd", function()
 	end
 end, { desc = "Yank diagnostic under cursor" })
 
-vim.keymap.set("n", "<leader>mq", function()
+vim.keymap.set("n", "<leader>mf", function()
 	utils.write_if_writable()
 	vim.fn.setqflist({}, "r") -- reset quickfix list
 	vim.cmd("make")
