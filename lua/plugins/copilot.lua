@@ -11,9 +11,7 @@ chat.setup({
   },
   strategies = {
     chat = {
-      adapter = {
-        name = "copilot_acp",
-      },
+      adapter = "claude_code",
       keymaps = {
         next_chat = false,
         previous_chat = false,
@@ -28,11 +26,18 @@ chat.setup({
   extensions = {
     history = {
       enabled = true,
-      opts = {},
+      opts = {
+        auto_generate_title = false,
+        picker = "snacks",
+      },
     },
   },
   interactions = {
     chat = {
+      keymaps = {
+        next_chat = false,
+        previous_chat = false,
+      },
       opts = {
         completion_provider = "default",
       },
