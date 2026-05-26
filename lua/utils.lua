@@ -17,7 +17,6 @@ function M.move_cursor_to_end(opts)
 	local win = opts and opts.win or 0
 	local last_line = vim.api.nvim_buf_line_count(buf)
 	local last_col = #vim.api.nvim_buf_get_lines(buf, last_line - 1, last_line, false)[1] or 0
-	vim.print("Moving cursor to end of buffer: line " .. last_line .. ", col " .. last_col)
 	vim.api.nvim_win_set_cursor(win, { last_line, last_col })
 end
 
