@@ -19,6 +19,7 @@ keymap.set("n", "<S-tab>", function() vim.cmd.bprevious() end, { desc = "Go to p
 keymap.set("n", "<leader>lz", function() vim.cmd.Lazy("update") end, { desc = "Update lazy plugins" })
 
 keymap.set("n", "<leader>yp", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, { desc = "Yank file path to clipboard" })
+keymap.set("n", "<leader>yr", function() vim.fn.setreg("+", vim.fn.expand("%:.")) end, { desc = "Yank relative file path to clipboard" })
 
 keymap.set("n", "<leader>yd", function()
   local diag = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })[1]
