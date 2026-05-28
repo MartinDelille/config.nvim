@@ -80,6 +80,7 @@ snacks.setup({
 vim.keymap.set("n", "<leader><space>", function() snacks.picker.smart() end, { desc = "Smart Find Files" })
 vim.keymap.set("n", "<leader>,", function() snacks.picker.buffers() end, { desc = "Buffers" })
 vim.keymap.set("n", "<leader>/", function() snacks.picker.grep() end, { desc = "Live Grep" })
+vim.keymap.set("n", "<leader>rg", function() snacks.picker.grep({ ft = vim.bo.filetype }) end, { desc = "Live Grep" })
 vim.keymap.set("n", "<leader>:", function() snacks.picker.command_history() end, { desc = "Command History" })
 vim.keymap.set("n", "<leader>e", function() snacks.explorer() end, { desc = "File Explorer" })
 -- git
