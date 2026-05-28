@@ -97,6 +97,7 @@ vim.keymap.set("n", "<leader>fr", function() snacks.picker.recent() end, { desc 
 vim.keymap.set("n", '<leader>s"', function() snacks.picker.registers() end, { desc = "Registers" })
 vim.keymap.set("n", "<leader>s/", function() snacks.picker.search_history() end, { desc = "Search History" })
 vim.keymap.set("n", "<leader>sc", function() snacks.dashboard.pick("files", { cwd = vim.fn.stdpath("config") }) end, { desc = "Configuration" })
+vim.keymap.set("n", "<leader>sp", function() snacks.dashboard.pick("files", { cwd = vim.fn.stdpath("data") .. "/site/pack/core/opt" }) end, { desc = "Plugin sources" })
 vim.keymap.set("n", "<leader>sd", function() snacks.picker.diagnostics() end, { desc = "Diagnostics" })
 vim.keymap.set("n", "<leader>sq", function() snacks.picker.qflist() end, { desc = "Quickfix List" })
 vim.keymap.set("n", "<leader>su", function() snacks.picker.undo() end, { desc = "Undo History" })
