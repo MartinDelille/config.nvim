@@ -9,6 +9,8 @@ vim.pack.add({
   { src = "https://github.com/kylechui/nvim-surround", version = vim.version.range("4.0.0 - 5.0.0") },
 })
 
+require("markdown-table-mode").setup()
+
 require("plugins/treesitter")
 require("plugins/oil")
 require("plugins/snacks-config")
