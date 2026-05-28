@@ -8,6 +8,12 @@ require("oil-git").setup({})
 
 local oil = require("oil")
 oil.setup({
+  keymaps = {
+    ["<C-h>"] = false,
+    ["<C-l>"] = false,
+    ["<C-j>"] = false,
+    ["<C-k>"] = false,
+  },
   git = {
     mv = function(_, _) return true end,
   },
