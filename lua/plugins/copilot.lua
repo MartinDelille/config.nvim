@@ -3,18 +3,26 @@ vim.pack.add({
   "https://github.com/ravitemer/codecompanion-history.nvim",
 })
 
-local codecompanion = require("codecompanion")
+local chat = require("codecompanion")
 
-codecompanion.setup({
+chat.setup({
   action_palette = {
     provider = "snacks",
   },
   strategies = {
     chat = {
+      adapter = {
+        name = "copilot_acp",
+      },
       keymaps = {
         next_chat = false,
         previous_chat = false,
       },
+    },
+  },
+  opts = {
+    title_generation_opts = {
+      enabled = false,
     },
   },
   extensions = {
@@ -25,11 +33,11 @@ codecompanion.setup({
   },
   interactions = {
     chat = {
-      model = "claude-sonnet",
       opts = {
-        completion_provider = "blink", -- blink|cmp|coc|default
+        completion_provider = "default",
       },
     },
   },
 })
-vim.keymap.set("n", "<leader>cc", function() codecompanion.toggle() end, { desc = "Code Companion" })
+
+vim.keymap.set("n", "<leader>cc", function() chat.toggle() end, { desc = "Code Companion" })

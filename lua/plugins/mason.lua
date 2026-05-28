@@ -27,7 +27,6 @@ mason_lspconfig.setup({
     "basedpyright",
     "html",
     "clangd",
-    "copilot",
     "cssls",
     "lua_ls",
     "emmet_ls",
