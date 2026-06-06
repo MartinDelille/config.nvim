@@ -2,7 +2,7 @@ return {
   settings = {
     Lua = {
       workspace = {
-        checkThirdParty = true,
+        checkThirdParty = false,
         library = {
           vim.env.VIMRUNTIME,
         },
