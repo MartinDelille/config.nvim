@@ -3,12 +3,11 @@ return {
     Lua = {
       workspace = {
         checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME,
-        },
+        library = { vim.env.VIMRUNTIME },
       },
       diagnostics = {
         disable = { "missing-fields" },
+        globals = { "vim" },
       },
     },
   },
