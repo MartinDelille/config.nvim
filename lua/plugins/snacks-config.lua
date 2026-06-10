@@ -6,7 +6,7 @@ local utils = require("utils")
 if vim.g.MAKE_AUTO_CLOSE == nil then vim.g.MAKE_AUTO_CLOSE = true end
 
 local function do_make(opts)
-  utils.write_if_writable()
+  vim.cmd("wall")
   vim.cmd.rshada()
   local auto_close = vim.g.MAKE_AUTO_CLOSE
   if opts and opts.auto_close ~= nil then auto_close = opts.auto_close end
