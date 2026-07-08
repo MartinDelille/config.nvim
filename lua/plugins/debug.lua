@@ -24,11 +24,21 @@ require("nvim-dap-virtual-text").setup({
   virt_text_pos = "inline",
 })
 
+vim.keymap.set("n", "<leader>dr", function() dap.continue() end, { desc = "Start or continue the debugger" })
+vim.keymap.set("n", "<leader>ds", function()
+  vim.cmd.rshada()
+  local opts = { prompt = "Arguments?", default = vim.g.ARGUMENTS, completion = "file" }
+  vim.ui.input(opts, function(input)
+    vim.g.ARGUMENTS = input
+    vim.cmd.wshada()
+    dap.continue()
+  end)
+end, { desc = "Start or continue the debugger" })
 vim.keymap.set("n", "<leader>db", function() breakpoints.toggle_breakpoint() end, { desc = "Add a breakpoint at line" })
 vim.keymap.set("n", "<F9>", function() breakpoints.toggle_breakpoint() end, { desc = "Add a breakpoint at line" })
-vim.keymap.set("n", "<leader>dr", function() dap.continue() end, { desc = "Start or continue the debugger" })
 vim.keymap.set("n", "<F5>", function() dap.continue() end, { desc = "Start or continue the debugger" })
 vim.keymap.set("n", "<leader>di", function() dap.step_into() end, { desc = "Step Into" })
+vim.keymap.set("n", "<F7>", function() dap.step_into() end, { desc = "Step Into" })
 vim.keymap.set("n", "<leader>do", function() dap.step_over() end, { desc = "Step Over" })
 vim.keymap.set("n", "<F8>", function() dap.step_over() end, { desc = "Step Over" })
 vim.keymap.set("n", "<leader>dt", function() dap.terminate() end, { desc = "Terminate the debugging session" })
@@ -63,7 +73,8 @@ dap.configurations.cpp = {
       end
     end,
     args = function()
-      local arguments = os.getenv("ARGUMENTS")
+      vim.cmd.rshada()
+      local arguments = vim.g.ARGUMENTS
       vim.notify(string.format("ARGUMENTS: %s", arguments or "nil"))
       if arguments then return vim.split(arguments, " ") end
       return {}
