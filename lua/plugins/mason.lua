@@ -53,5 +53,6 @@ mason_tool_installer.setup({
     "rust-analyzer",
     "gdtoolkit",
     "shfmt",
+    "tree-sitter-cli",
   },
 })
