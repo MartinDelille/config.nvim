@@ -124,7 +124,7 @@ vim.keymap.set("n", "<leader>mc", function()
   do_make()
 end, { desc = "Switch auto close terminal on make" })
 vim.keymap.set("n", "<leader>ms", function()
-  utils.write_if_writable()
+  vim.cmd("wall")
   -- Parse Makefile for targets
   local makefile = "Makefile"
   local f = io.open(makefile, "r")

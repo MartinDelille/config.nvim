@@ -38,7 +38,7 @@ keymap.set("n", "<leader>yd", function()
 end, { desc = "Yank diagnostic under cursor" })
 
 vim.keymap.set("n", "<leader>mf", function()
-  utils.write_if_writable()
+  vim.cmd("wall")
   vim.fn.setqflist({}, "r") -- reset quickfix list
   vim.cmd("make")
 end, { desc = "Run Make" })
