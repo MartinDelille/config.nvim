@@ -3,8 +3,7 @@ vim.pack.add({
   "https://github.com/Weissle/persistent-breakpoints.nvim",
   "https://github.com/mfussenegger/nvim-dap-python",
   "https://github.com/jay-babu/mason-nvim-dap.nvim",
-  { src = "https://github.com/igorlfs/nvim-dap-view", version = vim.version.range("1.0.0 - 2.0.0") },
-  "https://github.com/theHamsta/nvim-dap-virtual-text",
+  "https://github.com/igorlfs/nvim-dap-view",
 })
 
 local dap = require("dap")
@@ -13,17 +12,21 @@ require("persistent-breakpoints").setup({
 })
 local breakpoints = require("persistent-breakpoints.api")
 
-require("mason-nvim-dap").setup({ handlers = {} })
 require("dap-python").setup("uv")
+-- https://igorlfs.github.io/nvim-dap-view/
 local view = require("dap-view")
 view.setup({
-  switchbuf = "useopen",
+  switchbuf = "uselast",
   auto_toggle = true,
-})
-require("nvim-dap-virtual-text").setup({
-  virt_text_pos = "inline",
+  virtual_text = {
+    enabled = true,
+    position = "eol",
+  },
 })
 
+vim.keymap.set("n", "<leader>dB", function() view.jump_to_view("breakpoints") end, { desc = "Jump to breakpoints view" })
+vim.keymap.set("n", "<leader>dT", function() view.jump_to_view("threads") end, { desc = "Jump to threads view" })
+vim.keymap.set("n", "<leader>dS", function() view.jump_to_view("scopes") end, { desc = "Jump to scopes view" })
 vim.keymap.set("n", "<leader>dr", function() dap.continue() end, { desc = "Start or continue the debugger" })
 vim.keymap.set("n", "<leader>ds", function()
   vim.cmd.rshada()
@@ -51,12 +54,8 @@ vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", n
 vim.fn.sign_define("DapStopped", { text = "➡️", texthl = "", linehl = "debugPC", numhl = "" })
 
 dap.adapters.codelldb = {
-  type = "server",
-  port = "${port}",
-  executable = {
-    command = "codelldb",
-    args = { "--port", "${port}" },
-  },
+  type = "executable",
+  command = "codelldb",
 }
 dap.configurations.cpp = {
   {
