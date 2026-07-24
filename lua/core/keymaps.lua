@@ -22,21 +22,23 @@ keymap.set("n", "<leader>yp", function() vim.fn.setreg("+", vim.fn.expand("%:p")
 keymap.set("n", "<leader>yr", function() vim.fn.setreg("+", vim.fn.expand("%:.")) end, { desc = "Yank relative file path to clipboard" })
 
 keymap.set("n", "<leader>yd", function()
-  local diag = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })[1]
-  if diag then
+  local diags = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })
+  local results = {}
+  for _, diag in ipairs(diags) do
     local code = diag.code or (diag.user_data and diag.user_data.lsp and diag.user_data.lsp.code) or "N/A"
     local source = diag.source or (diag.user_data and diag.user_data.lsp and diag.user_data.lsp.source) or "N/A"
-    local lnum = (diag.lnum or 0) + 1
-    local col = (diag.col or 0) + 1
     local filename = vim.api.nvim_buf_get_name(diag.bufnr or 0)
-    local location = string.format("%s:%d:%d", filename ~= "" and vim.fn.fnamemodify(filename, ":.") or "[No Name]", lnum, col)
-    local msg = diag.message or ""
-    local result = string.format("[code: %s] [source: %s] [location: %s]\n%s", code, source, location, msg)
-    vim.fn.setreg("+", result)
-    vim.notify("Diagnostic yanked")
+    filename = filename ~= "" and vim.fn.fnamemodify(filename, ":.") or "[No Name]"
+    local location = string.format("%s:%d:%d", filename, (diag.lnum or 0) + 1, (diag.col or 0) + 1)
+    table.insert(results, string.format("[code: %s] [source: %s] [location: %s]\n%s", code, source, location, diag.message))
   end
-end, { desc = "Yank diagnostic under cursor" })
-
+  if #diags > 0 then
+    vim.fn.setreg("+", table.concat(results, "\n"), "l")
+    vim.notify("All diagnostics yanked")
+  else
+    vim.notify("No diagnostics found under cursor")
+  end
+end, { desc = "Yank all diagnostics under cursor" })
 vim.keymap.set("n", "<leader>mf", function()
   vim.cmd("wall")
   vim.fn.setqflist({}, "r") -- reset quickfix list
