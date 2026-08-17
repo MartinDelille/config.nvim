@@ -79,6 +79,17 @@ vim.keymap.set("n", "<leader>xx", function()
 end, { desc = "Run the current buffer" })
 vim.keymap.set("t", "<esc><esc>", "<C-\\><C-n>", { desc = "Exit terminal mode with double Esc" })
 
+local function disable_resize_mode()
+  -- Remove the buffer-local mappings
+  vim.keymap.del("n", "j", { buffer = 0 })
+  vim.keymap.del("n", "k", { buffer = 0 })
+  vim.keymap.del("n", "l", { buffer = 0 })
+  vim.keymap.del("n", "h", { buffer = 0 })
+  vim.keymap.del("n", "q", { buffer = 0 })
+  vim.keymap.del("n", "<Esc>", { buffer = 0 })
+  vim.notify("Resize mode exited", vim.log.levels.INFO)
+end
+
 local function enable_resize_mode()
   local opts = { noremap = true, silent = true, buffer = 0 }
   vim.notify("Resize mode: j/k/l/h to resize, q or <Esc> to quit", vim.log.levels.INFO)
@@ -90,17 +101,6 @@ local function enable_resize_mode()
   vim.keymap.set("n", "h", function() vim.cmd("vertical resize +5") end, opts)
   vim.keymap.set("n", "q", function() disable_resize_mode() end, opts)
   vim.keymap.set("n", "<Esc>", function() disable_resize_mode() end, opts)
-end
-
-function disable_resize_mode()
-  -- Remove the buffer-local mappings
-  vim.keymap.del("n", "j", { buffer = 0 })
-  vim.keymap.del("n", "k", { buffer = 0 })
-  vim.keymap.del("n", "l", { buffer = 0 })
-  vim.keymap.del("n", "h", { buffer = 0 })
-  vim.keymap.del("n", "q", { buffer = 0 })
-  vim.keymap.del("n", "<Esc>", { buffer = 0 })
-  vim.notify("Resize mode exited", vim.log.levels.INFO)
 end
 
 vim.keymap.set("n", "<leader>wr", enable_resize_mode, { noremap = true, silent = true })
