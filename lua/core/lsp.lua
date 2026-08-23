@@ -73,3 +73,20 @@ vim.lsp.enable("qmlls")
 --   end,
 -- })
 -- vim.cmd("set completeopt+=noselect")
+
+vim.keymap.set("n", "<leader>oh", function()
+  local client = vim.lsp.get_clients({ bufnr = 0, name = "clangd" })[1]
+
+  if not client then
+    vim.notify("clangd is not attached", vim.log.levels.WARN)
+    return
+  end
+
+  local params = {
+    uri = vim.uri_from_bufnr(0),
+  }
+
+  local response = client:request_sync("textDocument/switchSourceHeader", params, 1000, 0)
+
+  if response and response.result then vim.cmd.edit(vim.uri_to_fname(response.result)) end
+end, { desc = "Switch C++ source/header" })
