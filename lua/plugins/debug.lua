@@ -16,7 +16,7 @@ require("dap-python").setup("uv")
 -- https://igorlfs.github.io/nvim-dap-view/
 local view = require("dap-view")
 view.setup({
-  switchbuf = "uselast",
+  switchbuf = "usetab,uselast",
   auto_toggle = true,
   virtual_text = {
     enabled = true,
@@ -41,8 +41,8 @@ vim.keymap.set("n", "<leader>dc", function() dap.run_to_cursor() end, { desc = "
 vim.keymap.set("n", "<F11>", function() dap.run_to_cursor() end, { desc = "Continue to cursor" })
 vim.keymap.set({ "n", "x" }, "<leader>du", function() view.toggle() end, { desc = "Toggle DAP UI" })
 
-vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
-vim.fn.sign_define("DapStopped", { text = "➡️", texthl = "", linehl = "debugPC", numhl = "" })
+vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "Substitute", numhl = "" })
+vim.fn.sign_define("DapStopped", { text = "➡️", texthl = "", linehl = "", numhl = "" })
 
 local cmake = require("cmake-tools")
 
