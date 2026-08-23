@@ -28,15 +28,6 @@ vim.keymap.set("n", "<leader>dB", function() view.jump_to_view("breakpoints") en
 vim.keymap.set("n", "<leader>dT", function() view.jump_to_view("threads") end, { desc = "Jump to threads view" })
 vim.keymap.set("n", "<leader>dS", function() view.jump_to_view("scopes") end, { desc = "Jump to scopes view" })
 vim.keymap.set("n", "<leader>dr", function() dap.continue() end, { desc = "Start or continue the debugger" })
-vim.keymap.set("n", "<leader>ds", function()
-  vim.cmd.rshada()
-  local opts = { prompt = "Arguments?", default = vim.g.ARGUMENTS, completion = "file" }
-  vim.ui.input(opts, function(input)
-    vim.g.ARGUMENTS = input
-    vim.cmd.wshada()
-    dap.continue()
-  end)
-end, { desc = "Start or continue the debugger" })
 vim.keymap.set("n", "<leader>db", function() breakpoints.toggle_breakpoint() end, { desc = "Add a breakpoint at line" })
 vim.keymap.set("n", "<F9>", function() breakpoints.toggle_breakpoint() end, { desc = "Add a breakpoint at line" })
 vim.keymap.set("n", "<F5>", function() dap.continue() end, { desc = "Start or continue the debugger" })
@@ -53,6 +44,58 @@ vim.keymap.set({ "n", "x" }, "<leader>du", function() view.toggle() end, { desc 
 vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
 vim.fn.sign_define("DapStopped", { text = "➡️", texthl = "", linehl = "debugPC", numhl = "" })
 
+local cmake = require("cmake-tools")
+
+local function get_executable()
+  if cmake.is_cmake_project() then
+    local path = cmake.get_launch_target_path()
+    if path then return path end
+  end
+
+  local env_executable = vim.env.EXECUTABLE
+  if env_executable and env_executable ~= "" then return env_executable end
+
+  return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+end
+
+local function has_cmake_target() return cmake.is_cmake_project() and cmake.get_launch_target() ~= nil end
+
+local function get_arguments()
+  if has_cmake_target() then return cmake.get_launch_args() end
+
+  vim.cmd.rshada()
+  local raw = vim.g.ARGUMENTS or ""
+
+  if raw == "" then return {} end
+
+  return vim.split(raw, "%s+", { trimempty = true })
+end
+
+vim.keymap.set("n", "<leader>ds", function()
+  local current = get_arguments()
+
+  vim.ui.input({
+    prompt = "Arguments? ",
+    default = table.concat(current, " "),
+    completion = "file",
+  }, function(input)
+    if input == nil then return end
+
+    local args = vim.split(input, "%s+", { trimempty = true })
+
+    if has_cmake_target() then
+      -- Equivalent to :CMakeLaunchArgs ...
+      cmake.launch_args({ fargs = args })
+    else
+      -- Fallback for non-CMake projects
+      vim.g.ARGUMENTS = input
+      vim.cmd.wshada()
+    end
+
+    dap.continue()
+  end)
+end)
+
 dap.adapters.codelldb = {
   type = "executable",
   command = "codelldb",
@@ -62,22 +105,8 @@ dap.configurations.cpp = {
     name = "Launch file",
     type = "codelldb",
     request = "launch",
-    program = function()
-      local executable = os.getenv("EXECUTABLE")
-      vim.notify(string.format("EXECUTABLE: %s", executable or "nil"))
-      if executable then
-        return executable
-      else
-        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-      end
-    end,
-    args = function()
-      vim.cmd.rshada()
-      local arguments = vim.g.ARGUMENTS
-      vim.notify(string.format("ARGUMENTS: %s", arguments or "nil"))
-      if arguments then return vim.split(arguments, " ") end
-      return {}
-    end,
+    program = get_executable,
+    args = get_arguments,
     cwd = "${workspaceFolder}",
     stopOnEntry = false,
     preRunCommands = {
