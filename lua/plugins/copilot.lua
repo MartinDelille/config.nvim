@@ -1,58 +1,43 @@
-return {
-	{
-		"github/copilot.vim",
-		config = function()
-			vim.g.copilot_filetypes = {
-				["gitcommit"] = true,
-			}
-		end,
-	},
-	{
-		"olimorris/codecompanion.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"ravitemer/codecompanion-history.nvim",
-		},
-		interactions = {
-			chat = {
-				model = "claude-sonnet",
-			},
-		},
-		keys = {
-			{
-				"<leader>cc",
-				function()
-					require("codecompanion").toggle()
-					vim.cmd("wincmd =")
-				end,
-				desc = "Code Companion",
-			},
-		},
-		opts = {
-			action_palette = {
-				provider = "snacks",
-			},
-			strategies = {
-				inline = {
-					keymaps = {
-						accept_change = { modes = { n = "<leader>ca" } },
-						reject_change = { modes = { n = "<leader>cr" } },
-						always_accept = { modes = { n = "<leader>cy" } },
-					},
-				},
-				chat = {
-					keymaps = {
-						next_chat = false,
-						previous_chat = false,
-					},
-				},
-			},
-			extensions = {
-				history = {
-					enabled = true,
-					opts = {},
-				},
-			},
-		},
-	},
-}
+vim.pack.add({
+  "https://github.com/olimorris/codecompanion.nvim",
+  "https://github.com/ravitemer/codecompanion-history.nvim",
+})
+
+local chat = require("codecompanion")
+
+chat.setup({
+  action_palette = {
+    provider = "snacks",
+  },
+  strategies = {
+    chat = {
+      adapter = {
+        name = "copilot_acp",
+      },
+      keymaps = {
+        next_chat = false,
+        previous_chat = false,
+      },
+    },
+  },
+  opts = {
+    title_generation_opts = {
+      enabled = false,
+    },
+  },
+  extensions = {
+    history = {
+      enabled = true,
+      opts = {},
+    },
+  },
+  interactions = {
+    chat = {
+      opts = {
+        completion_provider = "default",
+      },
+    },
+  },
+})
+
+vim.keymap.set("n", "<leader>cc", function() chat.toggle() end, { desc = "Code Companion" })

@@ -1,15 +1,14 @@
 return {
-	settings = {
-		Lua = {
-			workspace = {
-				checkThirdParty = true,
-				library = {
-					vim.env.VIMRUNTIME,
-				},
-			},
-			diagnostics = {
-				disable = { "missing-fields" },
-			},
-		},
-	},
+  settings = {
+    Lua = {
+      workspace = {
+        checkThirdParty = false,
+        library = { vim.env.VIMRUNTIME },
+      },
+      diagnostics = {
+        disable = { "missing-fields" },
+        globals = { "vim" },
+      },
+    },
+  },
 }
