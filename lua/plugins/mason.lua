@@ -38,7 +38,6 @@ mason_lspconfig.setup({
 
 mason_tool_installer.setup({
   ensure_installed = {
-    "clang-format",
     "codelldb",
     "cpplint",
     "debugpy",
