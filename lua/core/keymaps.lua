@@ -42,7 +42,8 @@ end, { desc = "Yank all diagnostics under cursor" })
 vim.keymap.set("n", "<leader>mf", function()
   vim.cmd("wall")
   vim.fn.setqflist({}, "r") -- reset quickfix list
-  vim.cmd("make")
+  vim.cmd.rshada()
+  vim.cmd("make " .. vim.g.MAKE_TARGET)
 end, { desc = "Run Make" })
 
 vim.keymap.set("n", "<leader>wo", function() vim.cmd("write") end, { desc = "Write the current buffer" })
