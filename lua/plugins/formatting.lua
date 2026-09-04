@@ -1,5 +1,11 @@
 vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
 require("conform").setup({
+  formatters = {
+    mdformat = {
+      stdin = false,
+      args = { "--number", "$FILENAME" },
+    },
+  },
   formatters_by_ft = {
     make = { "bake" },
     cmake = { "gersemi" },
@@ -11,7 +17,7 @@ require("conform").setup({
     jsonc = { "prettier" },
     yaml = { "prettier" },
     cpp = { "clang-format" },
-    markdown = { "prettier" },
+    markdown = { "mdformat" },
     liquid = { "prettier" },
     lua = { "stylua" },
     gdscript = { "gdformat" },
